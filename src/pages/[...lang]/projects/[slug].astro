@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { locales } from '@/i18n/locales';
+import { localeParam } from '@/i18n/paths';
+import { findNextProject, getProjects } from '@/lib/projects';
+import ProjectView from '@/views/ProjectView.astro';
+
+export const getStaticPaths = (async () => {
+  const routes = await Promise.all(
+    locales.map(async (locale) => {
+      const projects = await getProjects(locale);
+
+      return projects.map((project) => ({
+        params: { lang: localeParam(locale), slug: project.slug },
+        props: { locale, project, next: findNextProject(projects, project) },
+      }));
+    }),
+  );
+
+  return routes.flat();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { locale, project, next } = Astro.props;
+---
+
+<ProjectView locale={locale} project={project} next={next} />

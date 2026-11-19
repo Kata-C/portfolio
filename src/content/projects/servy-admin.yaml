@@ -1,0 +1,62 @@
+order: 3
+year: 2026
+preview: chart
+client: 'Servy'
+stack:
+  - 'Next.js'
+  - 'React'
+  - 'TypeScript'
+  - 'Tailwind CSS'
+  - 'TanStack Query'
+domain: 'Servy Admin'
+media:
+  cover: '../../assets/projects/servy-admin/cover.jpg'
+  desktop: '../../assets/projects/servy-admin/desktop.jpg'
+  detail: '../../assets/projects/servy-admin/detail.jpg'
+copy:
+  es:
+    title: 'Servy Admin'
+    category: 'Panel de administración'
+    summary: 'Panel interno para operar Servy: verificar proveedores, moderar reportes y reseñas, y medir el negocio.'
+    role: 'Diseño y desarrollo'
+    duration: 'Desde ago 2026'
+    challenge:
+      title: 'Operar el negocio a mano, una petición a la vez.'
+      body: 'Antes del panel, aprobar a un proveedor, revisar un documento de identidad o atender un reporte se hacía con peticiones directas a la API. Era lento, fácil de equivocarse y solo podía hacerlo quien programaba.'
+    solution:
+      title: 'Una herramienta interna que todo el equipo puede usar.'
+      body: 'Construí el panel con Next.js sobre las operaciones de administración de la API, con tipos generados del contrato OpenAPI. Está pensado para escritorio y organizado por colas de trabajo: lo que espera revisión aparece primero. Los datos sensibles tienen permisos por rol y cada acceso queda en una bitácora de auditoría.'
+    features:
+      - title: 'Verificación de proveedores'
+        body: 'Una cola con las solicitudes pendientes, de la más antigua a la más reciente, con acceso restringido por rol.'
+      - title: 'Moderación con contexto'
+        body: 'Cada reporte abre el caso completo en una sola vista, con todo lo necesario para resolverlo. El acceso a la información privada está controlado y queda registrado.'
+      - title: 'Estadísticas del negocio'
+        body: 'Tendencias de usuarios y tickets, embudo de cotización, suscripciones y calidad del catálogo en una sola vista.'
+    outcome:
+      lead: 'La operación diaria de Servy,'
+      accent: 'en una sola herramienta.'
+      body: 'Verificar proveedores, administrar el catálogo y la guía de precios, revisar cobros y atender reportes dejó de ser una tarea técnica. El panel crece junto con el producto.'
+  en:
+    title: 'Servy Admin'
+    category: 'Admin panel'
+    summary: 'Internal panel to run Servy: verify providers, moderate reports and reviews, and measure the business.'
+    role: 'Design and development'
+    duration: 'Since Aug 2026'
+    challenge:
+      title: 'Running the business by hand, one request at a time.'
+      body: 'Before the panel, approving a provider, reviewing an identity document or handling a report meant sending requests straight to the API. It was slow, error-prone and only someone who could code was able to do it.'
+    solution:
+      title: 'An internal tool the whole team can use.'
+      body: 'I built the panel with Next.js on top of the API admin operations, with types generated from the OpenAPI contract. It is designed for desktop and organized around work queues: whatever is waiting for review shows up first. Sensitive data has role-based permissions and every access is written to an audit log.'
+    features:
+      - title: 'Provider verification'
+        body: 'A queue of pending requests, oldest first, with role-restricted access.'
+      - title: 'Moderation with context'
+        body: 'Each report opens the full case in a single view, with everything needed to resolve it. Access to private information is controlled and logged.'
+      - title: 'Business statistics'
+        body: 'User and ticket trends, the quote funnel, subscriptions and catalog quality in a single view.'
+    outcome:
+      lead: 'The daily operation of Servy,'
+      accent: 'in a single tool.'
+      body: 'Verifying providers, managing the catalog and the price guide, reviewing payments and handling reports stopped being a technical task. The panel grows along with the product.'

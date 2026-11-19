@@ -1,0 +1,64 @@
+order: 4
+year: 2026
+preview: browser
+client: 'Servy'
+stack:
+  - 'Next.js'
+  - 'React'
+  - 'TypeScript'
+  - 'Tailwind CSS'
+  - 'Vercel'
+domain: 'servy.mx'
+liveUrl: 'https://servy.mx'
+media:
+  cover: '../../assets/projects/servy-web/cover.jpg'
+  desktop: '../../assets/projects/servy-web/desktop.jpg'
+  mobile: '../../assets/projects/servy-web/mobile.jpg'
+  detail: '../../assets/projects/servy-web/detail.jpg'
+copy:
+  es:
+    title: 'Servy Web'
+    category: 'Sitio web'
+    summary: 'Sitio público de Servy: landing, catálogo de proveedores y perfiles que se comparten con un código QR.'
+    role: 'Diseño y desarrollo'
+    duration: 'Desde jul 2026'
+    challenge:
+      title: 'Que Servy exista fuera de la app.'
+      body: 'Un proveedor necesita compartir su perfil con alguien que no tiene la app instalada, y quien busca un servicio desde el navegador necesita encontrar el catálogo. Además había que explicar el producto a dos públicos distintos: quien contrata y quien ofrece sus servicios.'
+    solution:
+      title: 'Un sitio que explica, muestra y da de alta.'
+      body: 'Diseñé y desarrollé el sitio con Next.js y Tailwind, con su propio sistema de diseño basado en tokens. Incluye la landing, una página de venta para proveedores, el catálogo con filtros, los perfiles públicos y una zona con sesión para clientes y negocios. Consume la misma API que la app, con tipos generados del contrato.'
+    features:
+      - title: 'Perfil público con QR'
+        body: 'Cada proveedor tiene una página propia en servy.mx que comparte con un enlace o un código QR impreso. Se genera al momento, así que un proveedor nuevo tiene su página en cuanto se da de alta.'
+      - title: 'Catálogo abierto'
+        body: 'Cualquiera puede buscar por oficio, filtrar por verificados, disponibilidad 24/7 o calificación, y ver los perfiles sin crear una cuenta.'
+      - title: 'Página para proveedores'
+        body: 'Explica el modelo, una cuota mensual sin comisión por trabajo, compara los tres planes y lleva directo al registro.'
+    outcome:
+      lead: 'En línea en servy.mx,'
+      accent: 'como puerta de entrada al producto.'
+      body: 'El sitio presenta las 23 categorías del catálogo, los planes para proveedores y la descarga de la app, y es el destino de los códigos QR que los proveedores comparten con sus clientes.'
+  en:
+    title: 'Servy Web'
+    category: 'Website'
+    summary: 'The public Servy website: landing page, provider catalog and profiles shared through a QR code.'
+    role: 'Design and development'
+    duration: 'Since Jul 2026'
+    challenge:
+      title: 'Making Servy exist outside the app.'
+      body: 'A provider needs to share their profile with someone who does not have the app installed, and anyone looking for a service from a browser needs to find the catalog. The product also had to be explained to two different audiences: people who hire and people who offer their services.'
+    solution:
+      title: 'A site that explains, shows and signs people up.'
+      body: 'I designed and built the site with Next.js and Tailwind, with its own token-based design system. It includes the landing page, a sales page for providers, the catalog with filters, public profiles and a signed-in area for clients and businesses. It consumes the same API as the app, with types generated from the contract.'
+    features:
+      - title: 'Public profile with QR'
+        body: 'Every provider has their own page on servy.mx to share through a link or a printed QR code. It is rendered on demand, so a new provider has a page as soon as they sign up.'
+      - title: 'Open catalog'
+        body: 'Anyone can search by trade, filter by verified providers, 24/7 availability or rating, and view profiles without creating an account.'
+      - title: 'Page for providers'
+        body: 'It explains the model, a monthly fee with no commission per job, compares the three plans and leads straight to sign-up.'
+    outcome:
+      lead: 'Live at servy.mx,'
+      accent: 'as the front door to the product.'
+      body: 'The site presents the 23 catalog categories, the provider plans and the app download, and it is the destination of the QR codes providers share with their clients.'

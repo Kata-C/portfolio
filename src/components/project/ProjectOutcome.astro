@@ -1,0 +1,54 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project.outcome;
+const { outcome } = project;
+---
+
+<Section tone="surface" labelledby="outcome-title">
+  <Container class="stack">
+    <div class="heading">
+      <SectionHeading
+        eyebrow={t.eyebrow}
+        title={outcome.lead}
+        accent={outcome.accent}
+        headingId="outcome-title"
+        align="center"
+        size="md"
+      />
+    </div>
+    <p class="body reveal">{outcome.body}</p>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .heading {
+    max-width: 760px;
+  }
+
+  .body {
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--ink-muted);
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+import SiteHeader from '@/components/layout/SiteHeader.astro';
+import Ambient from '@/components/ui/Ambient.astro';
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import Headline from '@/components/ui/Headline.astro';
+import Lede from '@/components/ui/Lede.astro';
+import { sectionHref } from '@/data/sections';
+import { site } from '@/data/site';
+import { alternatesFor } from '@/i18n/alternates';
+import { getDictionary } from '@/i18n/getDictionary';
+import { defaultLocale } from '@/i18n/locales';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const locale = defaultLocale;
+const t = getDictionary(locale);
+const alternates = alternatesFor('/');
+---
+
+<BaseLayout
+  title={`${t.meta.notFound} · ${site.name}`}
+  description={t.profile.description}
+  locale={locale}
+  alternates={alternates}
+>
+  <SiteHeader slot="header" locale={locale} alternates={alternates} />
+  <section class="missing" aria-labelledby="missing-title">
+    <Ambient grid />
+    <Container elevated class="intro">
+      <Headline id="missing-title" lines={t.notFound.headline} />
+      <Lede>{t.notFound.lede}</Lede>
+      <Button href={sectionHref(locale, 'top')}>{t.notFound.action}</Button>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  .missing {
+    position: relative;
+    margin-top: calc(var(--header-offset) * -1);
+    padding: 200px 0 var(--space-32);
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+    text-align: center;
+  }
+</style>

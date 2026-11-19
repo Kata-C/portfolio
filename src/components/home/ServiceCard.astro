@@ -1,0 +1,46 @@
+---
+import ServiceIcon from '@/components/icons/ServiceIcon.astro';
+import Card from '@/components/ui/Card.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Metric from '@/components/ui/Metric.astro';
+import Title from '@/components/ui/Title.astro';
+import type { Service } from '@/data/services';
+import { formatOrdinal } from '@/lib/ordinal';
+
+interface Props {
+  service: Service;
+  index: number;
+}
+
+const { service, index } = Astro.props;
+---
+
+<Card class="reveal service" style={`--i: ${index}`}>
+  <div class="icon">
+    <ServiceIcon name={service.icon} />
+  </div>
+  <Eyebrow>{formatOrdinal(index)}</Eyebrow>
+  <Title>{service.title}</Title>
+  <p class="description">{service.description}</p>
+  <Metric>{service.tags.join(' · ')}</Metric>
+</Card>
+
+<style>
+  .service {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .icon {
+    display: flex;
+    margin-bottom: var(--space-3);
+    color: var(--violet);
+  }
+
+  .description {
+    flex: 1;
+    margin-bottom: var(--space-3);
+    color: var(--ink-muted);
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'h3'> {
+  as?: 'h2' | 'h3' | 'span';
+  size?: 'md' | 'sm';
+}
+
+const { as: Element = 'h3', size = 'md', class: className, ...rest } = Astro.props;
+---
+
+<Element class:list={['title', `title-${size}`, className]} {...rest}>
+  <slot />
+</Element>
+
+<style>
+  .title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .title-md {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .title-sm {
+    font-size: 22px;
+    line-height: 28px;
+  }
+</style>

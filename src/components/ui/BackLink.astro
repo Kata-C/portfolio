@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+}
+
+const { href, class: className, ...rest } = Astro.props;
+---
+
+<a class:list={['back', className]} href={href} {...rest}>
+  <span class="chevron" aria-hidden="true">‹</span>
+  <slot />
+</a>
+
+<style>
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    font: 500 14px/1 var(--font-sans);
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-standard);
+  }
+
+  .back:hover {
+    color: var(--ink);
+  }
+
+  .back:focus-visible {
+    outline: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--focus-ring);
+  }
+
+  .chevron {
+    display: inline-block;
+    transition: transform var(--dur-fast) var(--ease-out-expo);
+  }
+
+  .back:hover .chevron {
+    transform: translateX(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back:hover .chevron {
+      transform: none;
+    }
+  }
+</style>

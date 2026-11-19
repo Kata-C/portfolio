@@ -1,0 +1,48 @@
+---
+import ContactSection from '@/components/home/ContactSection.astro';
+import Hero from '@/components/home/Hero.astro';
+import ProcessSection from '@/components/home/ProcessSection.astro';
+import ProjectsSection from '@/components/home/ProjectsSection.astro';
+import ServicesSection from '@/components/home/ServicesSection.astro';
+import SkillsSection from '@/components/home/SkillsSection.astro';
+import NavLink from '@/components/layout/NavLink.astro';
+import SiteHeader from '@/components/layout/SiteHeader.astro';
+import { navigationSections } from '@/data/navigation';
+import { sectionHref } from '@/data/sections';
+import { site } from '@/data/site';
+import { alternatesFor } from '@/i18n/alternates';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  locale: Locale;
+  projects: Project[];
+}
+
+const { locale, projects } = Astro.props;
+const t = getDictionary(locale);
+const alternates = alternatesFor('/');
+---
+
+<BaseLayout
+  title={`${site.name} · ${t.meta.tagline}`}
+  description={t.profile.description}
+  locale={locale}
+  alternates={alternates}
+>
+  <SiteHeader slot="header" locale={locale} alternates={alternates}>
+    {
+      navigationSections.map((section) => (
+        <NavLink href={sectionHref(locale, section)}>{t.navigation[section]}</NavLink>
+      ))
+    }
+  </SiteHeader>
+  <Hero locale={locale} />
+  <ServicesSection locale={locale} />
+  <ProjectsSection locale={locale} projects={projects} />
+  <SkillsSection locale={locale} />
+  <ProcessSection locale={locale} />
+  <ContactSection locale={locale} />
+</BaseLayout>

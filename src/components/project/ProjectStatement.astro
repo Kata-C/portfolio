@@ -1,0 +1,34 @@
+---
+import DisplayHeading from '@/components/ui/DisplayHeading.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  index: number;
+}
+
+const { eyebrow, title, body, index } = Astro.props;
+---
+
+<div class="statement reveal" style={`--i: ${index}`}>
+  <Eyebrow>{eyebrow}</Eyebrow>
+  <DisplayHeading title={title} size="md" />
+  <p class="body">{body}</p>
+</div>
+
+<style>
+  .statement {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .body {
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--ink-muted);
+  }
+</style>

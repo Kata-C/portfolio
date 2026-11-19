@@ -1,0 +1,60 @@
+---
+import ContactDetails from '@/components/home/ContactDetails.astro';
+import ContactForm from '@/components/home/ContactForm.astro';
+import Ambient from '@/components/ui/Ambient.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { sectionIds } from '@/data/sections';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale).contact;
+---
+
+<Section id={sectionIds.contact} labelledby="contact-title" clipped>
+  <Ambient slot="backdrop" />
+  <Container elevated class="stack">
+    <SectionHeading
+      eyebrow={t.eyebrow}
+      eyebrowTone="light"
+      title={t.title}
+      accent={t.accent}
+      lede={t.lede}
+      headingId="contact-title"
+      align="center"
+    />
+    <div class="panel glass reveal">
+      <ContactForm locale={locale} />
+      <ContactDetails locale={locale} />
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: var(--space-12);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--inner-highlight), var(--elev-1);
+  }
+
+  @media (max-width: 760px) {
+    .panel {
+      padding: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,61 @@
+order: 2
+year: 2026
+preview: code
+client: 'Servy'
+stack:
+  - 'NestJS'
+  - 'TypeScript'
+  - 'PostgreSQL'
+  - 'Prisma'
+  - 'WebSocket'
+  - 'AWS'
+domain: 'Servy API'
+media:
+  cover: '../../assets/projects/servy-api/cover.png'
+copy:
+  es:
+    title: 'Servy API'
+    category: 'Backend'
+    summary: 'El backend de Servy: 210 operaciones REST, chat en tiempo real y suscripciones, desplegado en AWS.'
+    role: 'Arquitectura, desarrollo e infraestructura'
+    duration: 'Jul 2026'
+    challenge:
+      title: 'Un marketplace completo con el presupuesto de una empresa que empieza.'
+      body: 'Servy necesitaba acceso por teléfono, verificación de proveedores, tickets, cotizaciones, chat, reseñas, suscripciones y un panel de administración. Todo sobre un solo backend que un equipo mínimo pudiera operar, con un costo que el negocio pudiera sostener desde el primer mes.'
+    solution:
+      title: 'Un monolito modular en NestJS, desplegado en AWS.'
+      body: 'Organicé el dominio en módulos independientes (acceso, proveedores, tickets, cotizaciones, chat, reseñas, suscripciones y administración) sobre una base de datos relacional. El contrato de la API se genera del código y de él salen los tipos que usan la app y la web, así los tres clientes siempre hablan el mismo idioma. Corre en contenedores sobre AWS, con despliegue automatizado y entornos de desarrollo y producción separados.'
+    features:
+      - title: 'Reparto justo de oportunidades'
+        body: 'Una urgencia no se avisa a todos a la vez: sale por oleadas a los proveedores disponibles de la zona, con reglas pensadas para repartir el trabajo de forma justa sin empeorar la experiencia del cliente.'
+      - title: 'Tiempo real con estados claros'
+        body: 'Chat y cotizaciones viajan por WebSocket. Cada ticket avanza por una máquina de estados explícita y deja una bitácora de eventos que el equipo puede consultar después.'
+      - title: 'Hecha para operarse'
+        body: 'Más de 800 pruebas automatizadas, monitoreo de errores y revisiones de seguridad periódicas.'
+    outcome:
+      lead: 'En producción desde octubre de 2026,'
+      accent: 'detrás de la app, la web y el panel.'
+      body: 'Una sola API atiende a los tres clientes de Servy, con 48 modelos de datos y 57 migraciones versionadas. Sigue creciendo con cada función nueva del producto.'
+  en:
+    title: 'Servy API'
+    category: 'Backend'
+    summary: 'The Servy backend: 210 REST operations, real-time chat and subscriptions, deployed on AWS.'
+    role: 'Architecture, development and infrastructure'
+    duration: 'Jul 2026'
+    challenge:
+      title: 'A full marketplace on an early-stage budget.'
+      body: 'Servy needed phone sign-in, provider verification, tickets, quotes, chat, reviews, subscriptions and an admin panel. All of it on a single backend that a minimal team could operate, at a cost the business could afford from the first month.'
+    solution:
+      title: 'A modular monolith in NestJS, deployed on AWS.'
+      body: 'I organized the domain into independent modules (auth, providers, tickets, quotes, chat, reviews, subscriptions and admin) on a relational database. The API contract is generated from the code, and the app and the website get their types from it, so all three clients always speak the same language. It runs in containers on AWS, with automated deployment and separate development and production environments.'
+    features:
+      - title: 'Fair distribution of opportunities'
+        body: 'An emergency is not sent to everyone at once: it goes out in waves to available providers in the area, with rules designed to share the work fairly without hurting the client experience.'
+      - title: 'Real time with clear states'
+        body: 'Chat and quotes travel over WebSocket. Every ticket moves through an explicit state machine and leaves an event log the team can review later.'
+      - title: 'Built to be operated'
+        body: 'More than 800 automated tests, error monitoring and regular security reviews.'
+    outcome:
+      lead: 'In production since October 2026,'
+      accent: 'behind the app, the website and the panel.'
+      body: 'A single API serves all three Servy clients, with 48 data models and 57 versioned migrations. It keeps growing with every new product feature.'

@@ -1,0 +1,84 @@
+---
+import PreviewFrame from '@/components/home/PreviewFrame.astro';
+---
+
+<PreviewFrame class="code">
+  <div class="row">
+    <span class="verb verb-accent"></span>
+    <span class="path path-wide"></span>
+  </div>
+  <div class="row">
+    <span class="verb"></span>
+    <span class="path path-mid"></span>
+  </div>
+  <div class="row">
+    <span class="verb"></span>
+    <span class="path path-short"></span>
+  </div>
+  <div class="row">
+    <span class="verb verb-accent"></span>
+    <span class="path path-mid"></span>
+  </div>
+  <span class="status"></span>
+</PreviewFrame>
+
+<style>
+  .code {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-height: 180px;
+    padding: 20px;
+    background-image: radial-gradient(
+      80% 70% at 30% 0%,
+      rgba(118, 80, 255, 0.22) 0%,
+      rgba(118, 80, 255, 0) 100%
+    );
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .verb {
+    flex: none;
+    width: 38px;
+    height: 16px;
+    border-radius: 5px;
+    background: var(--skeleton);
+  }
+
+  .verb-accent {
+    border: 1px solid var(--violet-edge);
+    background: var(--violet-soft);
+  }
+
+  .path {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-raised);
+  }
+
+  .path-wide {
+    width: 62%;
+  }
+
+  .path-mid {
+    width: 44%;
+  }
+
+  .path-short {
+    width: 30%;
+  }
+
+  .status {
+    width: 8px;
+    height: 8px;
+    margin-top: auto;
+    border-radius: var(--radius-pill);
+    background: var(--cyan);
+    box-shadow: var(--glow-cyan);
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import HeroPreview from '@/components/home/HeroPreview.astro';
+import Ambient from '@/components/ui/Ambient.astro';
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import Headline from '@/components/ui/Headline.astro';
+import Lede from '@/components/ui/Lede.astro';
+import Tag from '@/components/ui/Tag.astro';
+import { sectionHref } from '@/data/sections';
+import { site } from '@/data/site';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { hero, profile } = getDictionary(locale);
+const introduction = `${profile.intro(site.name)} ${profile.description}`;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <Ambient grid />
+  <Container elevated class="intro">
+    {site.available && <Tag live>{hero.available}</Tag>}
+    <Headline id="hero-title" lines={hero.headline} />
+    <Lede>{introduction}</Lede>
+    <div class="actions">
+      <Button href={sectionHref(locale, 'contact')}>{hero.primaryAction}</Button>
+      <Button variant="secondary" href={sectionHref(locale, 'projects')}>{hero.secondaryAction}</Button>
+    </div>
+  </Container>
+  <Container elevated class="preview">
+    <HeroPreview locale={locale} />
+  </Container>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    margin-top: calc(var(--header-offset) * -1);
+    padding: 200px 0 96px;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .preview {
+    margin-top: var(--space-20);
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      padding: 160px 0 var(--space-20);
+    }
+
+    .preview {
+      margin-top: var(--space-12);
+    }
+  }
+</style>

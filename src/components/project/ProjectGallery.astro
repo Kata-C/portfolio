@@ -1,0 +1,77 @@
+---
+import ProjectMedia from '@/components/project/ProjectMedia.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project.gallery;
+const { title, media } = project;
+
+const shots = [
+  { image: media.desktop, copy: t.desktop },
+  { image: media.mobile, copy: t.mobile },
+  { image: media.detail, copy: t.detail },
+].flatMap(({ image, copy }) => (image ? [{ image, copy, wide: image.width >= image.height }] : []));
+---
+
+<Section labelledby="gallery-title">
+  <Container width="wide" class="stack">
+    <div class="heading">
+      <SectionHeading eyebrow={t.eyebrow} title={t.title} headingId="gallery-title" size="md" />
+    </div>
+    <div class="grid">
+      {
+        shots.map((shot, index) => (
+          <ProjectMedia
+            class={`reveal shot ${shot.wide ? 'shot-wide' : 'shot-tall'}`}
+            style={`--i: ${index}`}
+            image={shot.image}
+            alt={shot.copy.alt(title)}
+            emptyLabel={shot.copy.emptyLabel}
+          />
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .heading {
+    width: 100%;
+    max-width: 932px;
+    margin-inline: auto;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .shot-wide {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .shot-tall {
+    flex: 1 1 320px;
+    max-width: 368px;
+    height: 520px;
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+import SiteHeader from '@/components/layout/SiteHeader.astro';
+import ProjectClosing from '@/components/project/ProjectClosing.astro';
+import ProjectFacts from '@/components/project/ProjectFacts.astro';
+import ProjectFeatures from '@/components/project/ProjectFeatures.astro';
+import ProjectGallery from '@/components/project/ProjectGallery.astro';
+import ProjectHero from '@/components/project/ProjectHero.astro';
+import ProjectNarrative from '@/components/project/ProjectNarrative.astro';
+import ProjectOutcome from '@/components/project/ProjectOutcome.astro';
+import ProjectShowcase from '@/components/project/ProjectShowcase.astro';
+import BackLink from '@/components/ui/BackLink.astro';
+import { sectionHref } from '@/data/sections';
+import { site } from '@/data/site';
+import { alternatesFor } from '@/i18n/alternates';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { projectRoute, type Project } from '@/lib/projects';
+
+interface Props {
+  locale: Locale;
+  project: Project;
+  next: Project;
+}
+
+const { locale, project, next } = Astro.props;
+const t = getDictionary(locale).project;
+const alternates = alternatesFor(projectRoute(project.slug));
+const { cover, desktop, mobile, detail } = project.media;
+const hasGallery = Boolean(desktop || mobile || detail);
+---
+
+<BaseLayout
+  title={`${project.title} · ${site.name}`}
+  description={project.summary}
+  locale={locale}
+  alternates={alternates}
+>
+  <SiteHeader slot="header" locale={locale} alternates={alternates}>
+    <BackLink href={sectionHref(locale, 'projects')}>{t.allProjects}</BackLink>
+  </SiteHeader>
+  <ProjectHero project={project} locale={locale} />
+  <ProjectFacts project={project} locale={locale} />
+  {cover && <ProjectShowcase project={project} locale={locale} />}
+  <ProjectNarrative project={project} locale={locale} />
+  <ProjectFeatures project={project} locale={locale} />
+  {hasGallery && <ProjectGallery project={project} locale={locale} />}
+  <ProjectOutcome project={project} locale={locale} />
+  <ProjectClosing next={next} locale={locale} />
+</BaseLayout>

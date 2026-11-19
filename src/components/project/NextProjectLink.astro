@@ -1,0 +1,89 @@
+---
+import ArrowRightIcon from '@/components/icons/ArrowRightIcon.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Metric from '@/components/ui/Metric.astro';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  eyebrow: string;
+}
+
+const { project, eyebrow } = Astro.props;
+---
+
+<a class="next glass reveal" href={project.href}>
+  <span class="copy">
+    <Eyebrow as="span" tone="light">{eyebrow}</Eyebrow>
+    <span class="name">{project.title}</span>
+    <Metric as="span">{project.label}</Metric>
+  </span>
+  <span class="arrow">
+    <ArrowRightIcon />
+  </span>
+</a>
+
+<style>
+  .next {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--inner-highlight), var(--elev-1);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .next:hover::after {
+    opacity: 1;
+  }
+
+  .next:focus-visible {
+    outline: none;
+    box-shadow: var(--inner-highlight), var(--focus-ring);
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .name {
+    font: 600 clamp(28px, 4vw, 40px) / 1.1 var(--font-display);
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-pill);
+    background: var(--gradient-brand);
+    box-shadow: var(--inner-highlight);
+    color: var(--on-violet);
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+
+  .next:hover .arrow {
+    transform: translateX(8px);
+  }
+
+  @media (max-width: 760px) {
+    .next {
+      padding: var(--space-6);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next:hover .arrow {
+      transform: none;
+    }
+  }
+</style>

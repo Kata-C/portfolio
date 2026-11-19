@@ -1,0 +1,42 @@
+---
+interface Props {
+  id?: string;
+  tone?: 'void' | 'surface';
+  labelledby?: string;
+  label?: string;
+  clipped?: boolean;
+}
+
+const { id, tone = 'void', labelledby, label, clipped = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={['section', `section-${tone}`, { clipped }]}
+  aria-labelledby={labelledby}
+  aria-label={label}
+>
+  <slot name="backdrop" />
+  <slot />
+</section>
+
+<style>
+  .section {
+    position: relative;
+    padding-block: var(--space-32);
+  }
+
+  .section-surface {
+    background: var(--surface);
+  }
+
+  .clipped {
+    overflow: hidden;
+  }
+
+  @media (max-width: 760px) {
+    .section {
+      padding-block: var(--space-20);
+    }
+  }
+</style>

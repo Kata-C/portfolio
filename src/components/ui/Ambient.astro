@@ -1,0 +1,78 @@
+---
+interface Props {
+  grid?: boolean;
+}
+
+const { grid = false } = Astro.props;
+---
+
+<div class="ambient" aria-hidden="true">
+  {grid && <div class="grid" />}
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+</div>
+
+<style>
+  .ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--gradient-aurora);
+  }
+
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, rgba(0, 0, 0, 0) 1px),
+      linear-gradient(90deg, var(--line) 1px, rgba(0, 0, 0, 0) 1px);
+    background-size: var(--space-12) var(--space-12);
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 0%, #000 0%, rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(70% 60% at 50% 0%, #000 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: var(--radius-pill);
+    filter: blur(var(--blur-orb));
+    animation: drift var(--dur-ambient) var(--ease-in-out) infinite alternate;
+  }
+
+  .orb-a {
+    top: -160px;
+    left: 18%;
+    width: 360px;
+    height: 360px;
+    background: var(--violet-strong);
+    opacity: 0.45;
+  }
+
+  .orb-b {
+    top: -120px;
+    right: 12%;
+    width: 280px;
+    height: 280px;
+    background: var(--violet-deep);
+    opacity: 0.35;
+    animation-delay: calc(var(--dur-ambient) / -2);
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+      transform: translate3d(60px, 40px, 0) scale(1.15);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb {
+      animation: none;
+    }
+  }
+</style>

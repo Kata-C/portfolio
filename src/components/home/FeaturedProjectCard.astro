@@ -1,0 +1,87 @@
+---
+import ProjectPreview from '@/components/home/ProjectPreview.astro';
+import Card from '@/components/ui/Card.astro';
+import Chip from '@/components/ui/Chip.astro';
+import Metric from '@/components/ui/Metric.astro';
+import TextLink from '@/components/ui/TextLink.astro';
+import Title from '@/components/ui/Title.astro';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  actionLabel: string;
+}
+
+const { project, actionLabel } = Astro.props;
+const { title, summary, stack, role, duration, preview, label, href } = project;
+const facts = [...stack, role, duration].join(' · ');
+---
+
+<Card flush class="reveal featured">
+  <div class="inner">
+    <div class="copy">
+      <Chip>{label}</Chip>
+      <Title class="title">{title}</Title>
+      <p class="summary">{summary}</p>
+      <Metric>{facts}</Metric>
+      <TextLink class="more" href={href}>{actionLabel}</TextLink>
+    </div>
+    <div class="art" aria-hidden="true">
+      <ProjectPreview kind={preview} />
+    </div>
+  </div>
+</Card>
+
+<style>
+  .featured {
+    grid-column: 1 / -1;
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: 40px;
+  }
+
+  .title {
+    margin-top: var(--space-2);
+  }
+
+  .summary {
+    color: var(--ink-muted);
+  }
+
+  .more {
+    margin-top: var(--space-3);
+  }
+
+  .art {
+    display: grid;
+    align-self: stretch;
+    min-height: 324px;
+    padding: var(--space-8);
+  }
+
+  @media (max-width: 760px) {
+    .inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .copy {
+      padding: var(--space-8);
+    }
+
+    .art {
+      min-height: 280px;
+      padding-top: 0;
+    }
+  }
+</style>

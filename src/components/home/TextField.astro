@@ -1,0 +1,76 @@
+---
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+
+interface Props {
+  label: string;
+  name: string;
+  type?: 'text' | 'email';
+  placeholder?: string;
+  autocomplete?: 'name' | 'email' | 'off';
+  multiline?: boolean;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  placeholder,
+  autocomplete = 'off',
+  multiline = false,
+} = Astro.props;
+
+const id = `contact-${name}`;
+---
+
+<div class="field">
+  <Eyebrow as="label" tone="muted" for={id}>{label}</Eyebrow>
+  {
+    multiline ? (
+      <textarea id={id} class="control control-multiline" name={name} rows="4" placeholder={placeholder} required />
+    ) : (
+      <input
+        id={id}
+        class="control"
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        autocomplete={autocomplete}
+        required
+      />
+    )
+  }
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .control {
+    width: 100%;
+    min-height: 48px;
+    padding: var(--space-3) 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface-raised);
+    color: var(--ink);
+    font: 400 16px/24px var(--font-sans);
+    transition: border-color var(--dur-fast) var(--ease-standard);
+  }
+
+  .control-multiline {
+    resize: vertical;
+  }
+
+  .control::placeholder {
+    color: var(--ink-placeholder);
+  }
+
+  .control:focus-visible {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: var(--focus-ring);
+  }
+</style>

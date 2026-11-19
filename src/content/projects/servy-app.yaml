@@ -1,0 +1,73 @@
+order: 1
+year: 2026
+preview: phone
+client: 'Servy'
+stack:
+  - 'React Native'
+  - 'Expo'
+  - 'TypeScript'
+  - 'TanStack Query'
+  - 'NativeWind'
+  - 'Socket.IO'
+domain: 'servy.mx'
+links:
+  - label: 'App Store'
+    href: 'https://apps.apple.com/us/app/servy/id6767023948'
+  - label: 'Google Play'
+    href: 'https://play.google.com/store/apps/details?id=com.servy.app'
+media:
+  cover: '../../assets/projects/servy-app/cover.jpg'
+  desktop: '../../assets/projects/servy-app/desktop.jpg'
+  mobile: '../../assets/projects/servy-app/mobile.jpg'
+  detail: '../../assets/projects/servy-app/detail.jpg'
+copy:
+  es:
+    title: 'Servy App'
+    category: 'App móvil'
+    summary: 'App para iOS y Android que conecta en tiempo real a clientes con proveedores verificados de servicios para el hogar.'
+    role: 'Producto, diseño y desarrollo'
+    duration: 'Jun – sep 2026'
+    challenge:
+      title: 'Contratar a alguien para tu casa era un acto de fe.'
+      body: 'Conseguir un plomero o un electricista dependía de grupos de Facebook y de recomendaciones de boca en boca. No sabes a quién dejas entrar a tu casa ni si puedes confiar en su trabajo, y cuando hay una urgencia tampoco sabes a quién llamar.'
+    solution:
+      title: 'Un solo lugar para encontrar, cotizar y calificar.'
+      body: 'Diseñé y desarrollé una app con dos caras, cliente y proveedor, sobre una sola base de código con Expo y React Native. El cliente explora un catálogo de proveedores verificados por el equipo, con portafolio y reseñas, o pide una urgencia y recibe cotizaciones en vivo. Por dentro está organizada en capas (rutas, casos de uso, dominio y transporte), con tipos generados del contrato OpenAPI del backend, así un cambio en la API se corrige en un solo lugar y no en cada pantalla.'
+    features:
+      - title: 'Urgencias en tiempo real'
+        body: 'El cliente describe el problema con fotos o video y su ubicación. Los proveedores cercanos reciben el aviso y responden con precio y tiempo de llegada; las cotizaciones aparecen en vivo y el cliente elige.'
+      - title: 'Perfiles verificados'
+        body: 'Cada proveedor pasa por una revisión de identidad y muestra su portafolio por álbumes, servicios con rango de precio, certificaciones y reseñas de trabajos reales.'
+      - title: 'Chat con cotización'
+        body: 'El acuerdo se cierra dentro del chat: el proveedor propone precio y fecha, el cliente acepta y el trabajo queda registrado para calificarlo al terminar.'
+      - title: 'Suscripciones dentro de la app'
+        body: 'Los proveedores eligen entre tres planes y pagan desde App Store o Google Play. Para el cliente la app es gratuita y Servy no cobra comisión por trabajo.'
+    outcome:
+      lead: 'Publicada en App Store y Google Play,'
+      accent: 'con más de 300 descargas.'
+      body: 'Salió a tiendas en octubre de 2026. En sus primeras semanas suma 210 descargas en iOS y más de 100 en Android, con 5.0 de calificación en sus primeras reseñas de Google Play. Sigue en desarrollo continuo: cada versión corrige, optimiza e itera el diseño con lo que se aprende de los usuarios reales.'
+  en:
+    title: 'Servy App'
+    category: 'Mobile app'
+    summary: 'iOS and Android app that connects clients with verified home service providers in real time.'
+    role: 'Product, design and development'
+    duration: 'Jun – Sep 2026'
+    challenge:
+      title: 'Hiring someone for your home was a leap of faith.'
+      body: 'Finding a plumber or an electrician depended on Facebook groups and word of mouth. You do not know who you are letting into your home or whether you can trust their work, and when there is an emergency you do not know who to call either.'
+    solution:
+      title: 'One place to find, quote and review.'
+      body: 'I designed and built an app with two sides, client and provider, on a single codebase with Expo and React Native. Clients browse a catalog of providers verified by the team, with portfolios and reviews, or request urgent help and receive live quotes. Inside, it is organized in layers (routes, use cases, domain and transport), with types generated from the backend OpenAPI contract, so an API change is fixed in one place instead of on every screen.'
+    features:
+      - title: 'Real-time emergencies'
+        body: 'The client describes the problem with photos or video and their location. Nearby providers get the alert and reply with a price and arrival time; quotes show up live and the client chooses.'
+      - title: 'Verified profiles'
+        body: 'Every provider goes through an identity review and shows a portfolio organized in albums, services with price ranges, certifications and reviews from real jobs.'
+      - title: 'Chat with quotes'
+        body: 'The deal is closed inside the chat: the provider proposes a price and date, the client accepts, and the job is recorded so it can be rated once it is done.'
+      - title: 'In-app subscriptions'
+        body: 'Providers choose one of three plans and pay through the App Store or Google Play. The app is free for clients and Servy takes no commission per job.'
+    outcome:
+      lead: 'Live on the App Store and Google Play,'
+      accent: 'with more than 300 downloads.'
+      body: 'It reached the stores in October 2026. In its first weeks it has 210 downloads on iOS and more than 100 on Android, with a 5.0 rating across its first Google Play reviews. It is in continuous development: every release fixes, optimizes and iterates on the design based on what real users teach us.'

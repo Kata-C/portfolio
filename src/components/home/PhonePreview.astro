@@ -1,0 +1,67 @@
+---
+import PreviewFrame from '@/components/home/PreviewFrame.astro';
+---
+
+<PreviewFrame class="stage">
+  <div class="phone">
+    <span class="heading"></span>
+    <span class="media"></span>
+    <span class="text text-wide"></span>
+    <span class="text text-short"></span>
+    <span class="action"></span>
+  </div>
+</PreviewFrame>
+
+<style>
+  .stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .phone {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 86px;
+    height: 150px;
+    padding: 10px 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+  }
+
+  .heading {
+    width: 60%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--skeleton);
+  }
+
+  .media {
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--violet-soft);
+  }
+
+  .text {
+    height: 6px;
+    border-radius: 4px;
+    background: var(--surface-raised);
+  }
+
+  .text-wide {
+    width: 80%;
+  }
+
+  .text-short {
+    width: 60%;
+  }
+
+  .action {
+    height: 16px;
+    margin-top: auto;
+    border-radius: 5px;
+    background: var(--gradient-brand);
+  }
+</style>

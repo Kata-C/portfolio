@@ -1,0 +1,107 @@
+---
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher.astro';
+import Button from '@/components/ui/Button.astro';
+import { sectionHref } from '@/data/sections';
+import { site } from '@/data/site';
+import type { Alternate } from '@/i18n/alternates';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+  alternates: Alternate[];
+}
+
+const { locale, alternates } = Astro.props;
+const t = getDictionary(locale).header;
+---
+
+<header class="header">
+  <nav class="nav glass" aria-label={t.navigation}>
+    <a class="brand" href={sectionHref(locale, 'top')}>
+      <span class="mark" aria-hidden="true"></span>
+      {site.name}
+    </a>
+    <div class="items">
+      <slot />
+    </div>
+    <div class="actions">
+      <LanguageSwitcher locale={locale} alternates={alternates} label={t.language} />
+      <Button size="sm" href={sectionHref(locale, 'contact')}>{t.contact}</Button>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: var(--space-4);
+    z-index: 50;
+    padding: 0 var(--space-4);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    max-width: 880px;
+    height: 52px;
+    margin: var(--space-4) auto 0;
+    padding: 0 var(--space-2) 0 var(--space-6);
+    border-radius: var(--radius-pill);
+    background: var(--glass-fill-strong);
+    box-shadow: var(--inner-highlight), var(--elev-1);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: auto;
+    overflow: hidden;
+    font: 600 16px/1 var(--font-display);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand:focus-visible {
+    outline: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--focus-ring);
+  }
+
+  .mark {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: var(--gradient-brand);
+    box-shadow: var(--inner-highlight);
+  }
+
+  .items {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 760px) {
+    .nav {
+      gap: var(--space-3);
+      padding-left: var(--space-4);
+    }
+
+    .items {
+      display: none;
+    }
+  }
+</style>

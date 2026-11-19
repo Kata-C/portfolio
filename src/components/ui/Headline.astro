@@ -1,0 +1,77 @@
+---
+import type { HeadlineLine } from '@/lib/headline';
+
+interface Props {
+  id?: string;
+  lines: HeadlineLine[];
+}
+
+const { id, lines } = Astro.props;
+---
+
+<h1 id={id} class="headline">
+  {
+    lines.map((line, index) => (
+      <span class="line">
+        <span class:list={['ink', { accent: line.accent }]} style={`--i: ${index}`}>
+          {line.text}
+        </span>
+      </span>
+    ))
+  }
+</h1>
+
+<style>
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(46px, 8.4vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+  }
+
+  .line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+  }
+
+  .ink {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rise var(--dur-hero) var(--ease-out-expo) forwards;
+    animation-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  .accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  @keyframes rise {
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink {
+      transform: none;
+      animation: fade var(--dur-fast) linear forwards;
+    }
+
+    @keyframes fade {
+      to {
+        opacity: 1;
+      }
+    }
+  }
+</style>

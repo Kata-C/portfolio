@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
+import MediaPlaceholder from '@/components/ui/MediaPlaceholder.astro';
+
+interface Props extends HTMLAttributes<'div'> {
+  image?: ImageMetadata;
+  alt: string;
+  emptyLabel: string;
+  bare?: boolean;
+}
+
+const { image, alt, emptyLabel, bare = false, class: className, ...rest } = Astro.props;
+---
+
+{
+  image ? (
+    <div class:list={['media', { bare }, className]} {...rest}>
+      <Image class="image" src={image} alt={alt} />
+    </div>
+  ) : (
+    <MediaPlaceholder label={emptyLabel} bare={bare} class={className} {...rest}>
+      <slot />
+    </MediaPlaceholder>
+  )
+}
+
+<style>
+  .media {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--void);
+  }
+
+  .bare {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+</style>

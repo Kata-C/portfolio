@@ -1,0 +1,44 @@
+---
+import FeaturedProjectCard from '@/components/home/FeaturedProjectCard.astro';
+import ProjectCard from '@/components/home/ProjectCard.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { sectionIds } from '@/data/sections';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  locale: Locale;
+  projects: Project[];
+}
+
+const { locale, projects } = Astro.props;
+const [featured, ...others] = projects;
+const t = getDictionary(locale).projects;
+---
+
+<Section id={sectionIds.projects} tone="surface" labelledby="projects-title">
+  <Container class="stack">
+    <SectionHeading eyebrow={t.eyebrow} title={t.title} lede={t.lede} headingId="projects-title" />
+    <div class="grid">
+      {featured && <FeaturedProjectCard project={featured} actionLabel={t.action} />}
+      {others.map((project, index) => <ProjectCard project={project} index={index} actionLabel={t.action} />)}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-6);
+  }
+</style>

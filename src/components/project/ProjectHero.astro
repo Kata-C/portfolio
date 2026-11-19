@@ -1,0 +1,78 @@
+---
+import Ambient from '@/components/ui/Ambient.astro';
+import BackLink from '@/components/ui/BackLink.astro';
+import Button from '@/components/ui/Button.astro';
+import Chip from '@/components/ui/Chip.astro';
+import Container from '@/components/ui/Container.astro';
+import Headline from '@/components/ui/Headline.astro';
+import Lede from '@/components/ui/Lede.astro';
+import { sectionHref } from '@/data/sections';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import { splitHeadline } from '@/lib/headline';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project;
+const { title, summary, label, liveUrl, repoUrl, links } = project;
+const hasActions = Boolean(liveUrl || repoUrl || links.length);
+---
+
+<section class="hero" aria-labelledby="project-title">
+  <Ambient grid />
+  <Container elevated class="intro">
+    <BackLink href={sectionHref(locale, 'projects')}>{t.back}</BackLink>
+    <Chip>{label}</Chip>
+    <Headline id="project-title" lines={splitHeadline(title)} />
+    <Lede>{summary}</Lede>
+    {
+      hasActions && (
+        <div class="actions">
+          {liveUrl && <Button href={liveUrl}>{t.liveSite}</Button>}
+          {links.map((link, index) => (
+            <Button variant={!liveUrl && index === 0 ? 'primary' : 'secondary'} href={link.href}>
+              {link.label}
+            </Button>
+          ))}
+          {repoUrl && (
+            <Button variant="secondary" href={repoUrl}>
+              {t.sourceCode}
+            </Button>
+          )}
+        </div>
+      )
+    }
+  </Container>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    margin-top: calc(var(--header-offset) * -1);
+    padding: 184px 0 64px;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      padding-top: 144px;
+    }
+  }
+</style>

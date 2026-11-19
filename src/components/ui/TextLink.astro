@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  tone?: 'accent' | 'light';
+}
+
+const { href, tone = 'accent', class: className, ...rest } = Astro.props;
+---
+
+<a class:list={['link', `link-${tone}`, className]} href={href} {...rest}>
+  <slot />
+  <span class="chevron" aria-hidden="true">›</span>
+</a>
+
+<style>
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font: 500 16px/1 var(--font-sans);
+    text-decoration: none;
+  }
+
+  .link-accent {
+    color: var(--link);
+  }
+
+  .link-light {
+    color: var(--violet-light);
+  }
+
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .link:focus-visible {
+    outline: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--focus-ring);
+  }
+
+  .chevron {
+    display: inline-block;
+    transition: transform var(--dur-fast) var(--ease-out-expo);
+  }
+
+  .link:hover .chevron {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link:hover .chevron {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import PreviewFrame from '@/components/home/PreviewFrame.astro';
+---
+
+<PreviewFrame class="chart">
+  <span class="bar" style="--level: 40%"></span>
+  <span class="bar" style="--level: 65%"></span>
+  <span class="bar bar-accent" style="--level: 90%"></span>
+  <span class="bar" style="--level: 55%"></span>
+</PreviewFrame>
+
+<style>
+  .chart {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: end;
+    gap: var(--space-2);
+    min-height: 180px;
+    padding: 18px;
+  }
+
+  .bar {
+    height: var(--level);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: var(--surface-raised);
+  }
+
+  .bar-accent {
+    border-color: var(--violet-edge);
+    background: var(--violet-soft);
+  }
+</style>

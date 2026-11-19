@@ -1,0 +1,41 @@
+---
+import ServiceCard from '@/components/home/ServiceCard.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { sectionIds } from '@/data/sections';
+import { services } from '@/data/services';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import { localize } from '@/i18n/localize';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale).services;
+---
+
+<Section id={sectionIds.services} labelledby="services-title">
+  <Container class="stack">
+    <SectionHeading eyebrow={t.eyebrow} title={t.title} lede={t.lede} headingId="services-title" />
+    <div class="grid">
+      {services.map((service, index) => <ServiceCard service={localize(service, locale)} index={index} />)}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: var(--space-6);
+  }
+</style>

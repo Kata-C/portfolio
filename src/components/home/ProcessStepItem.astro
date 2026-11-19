@@ -1,0 +1,42 @@
+---
+import Metric from '@/components/ui/Metric.astro';
+import Title from '@/components/ui/Title.astro';
+import type { ProcessStep } from '@/i18n/Dictionary';
+import { formatOrdinal } from '@/lib/ordinal';
+
+interface Props {
+  step: ProcessStep;
+  index: number;
+}
+
+const { step, index } = Astro.props;
+---
+
+<li class="step reveal" style={`--i: ${index}`}>
+  <Metric as="span" class="number">{formatOrdinal(index)}</Metric>
+  <Title size="sm">{step.title}</Title>
+  <p class="description">{step.description}</p>
+</li>
+
+<style>
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .step:last-child {
+    border-top-color: var(--violet);
+  }
+
+  .number {
+    font-weight: 500;
+    color: var(--violet);
+  }
+
+  .description {
+    color: var(--ink-muted);
+  }
+</style>

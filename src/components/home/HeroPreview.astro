@@ -1,0 +1,112 @@
+---
+import BrowserFrame from '@/components/ui/BrowserFrame.astro';
+import CodeBlock from '@/components/ui/CodeBlock.astro';
+import { heroSnippet } from '@/data/heroSnippet';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { hero } = getDictionary(locale);
+---
+
+<div class="scroll-scale">
+  <BrowserFrame address={hero.previewAddress}>
+    <div class="split">
+      <div class="source">
+        <CodeBlock lines={heroSnippet[locale]} />
+      </div>
+      <div class="mock" aria-hidden="true">
+        <span class="label"></span>
+        <span class="heading heading-wide"></span>
+        <span class="heading heading-short"></span>
+        <span class="text text-wide"></span>
+        <span class="text text-short"></span>
+        <div class="actions">
+          <span class="action action-primary"></span>
+          <span class="action action-secondary"></span>
+        </div>
+      </div>
+    </div>
+  </BrowserFrame>
+</div>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  .source {
+    display: grid;
+    min-width: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .mock {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: var(--space-8);
+  }
+
+  .label {
+    width: 38%;
+    height: 12px;
+    border-radius: var(--radius-sm);
+    background: var(--violet-soft);
+  }
+
+  .heading {
+    height: 30px;
+    border-radius: 8px;
+    background: var(--gradient-skeleton);
+  }
+
+  .heading-wide {
+    width: 86%;
+  }
+
+  .heading-short {
+    width: 64%;
+  }
+
+  .text {
+    height: 10px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-raised);
+  }
+
+  .text-wide {
+    width: 92%;
+    margin-top: var(--space-2);
+  }
+
+  .text-short {
+    width: 78%;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .action {
+    height: 36px;
+    border-radius: var(--radius-md);
+  }
+
+  .action-primary {
+    width: 120px;
+    background: var(--gradient-brand);
+  }
+
+  .action-secondary {
+    width: 100px;
+    border: 1px solid var(--line-strong);
+  }
+</style>

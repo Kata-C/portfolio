@@ -1,0 +1,32 @@
+---
+import ProjectStatement from '@/components/project/ProjectStatement.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project.narrative;
+const { challenge, solution } = project;
+---
+
+<Section label={t.label}>
+  <Container class="columns">
+    <ProjectStatement eyebrow={t.challenge} title={challenge.title} body={challenge.body} index={0} />
+    <ProjectStatement eyebrow={t.solution} title={solution.title} body={solution.body} index={1} />
+  </Container>
+</Section>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 64px;
+  }
+</style>

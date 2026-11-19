@@ -1,0 +1,76 @@
+---
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+
+interface Props {
+  name: string;
+  legend: string;
+  options: string[];
+}
+
+const { name, legend, options } = Astro.props;
+---
+
+<fieldset class="group">
+  <Eyebrow as="legend" tone="muted" class="legend">{legend}</Eyebrow>
+  <div class="options">
+    {
+      options.map((option, index) => (
+        <label class="pill">
+          <input class="visually-hidden" type="radio" name={name} value={option} checked={index === 0} />
+          {option}
+        </label>
+      ))
+    }
+  </div>
+</fieldset>
+
+<style>
+  .group {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .legend {
+    margin-bottom: var(--space-2);
+    padding: 0;
+  }
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font: 500 14px/1 var(--font-sans);
+    color: var(--ink-muted);
+    transition:
+      color var(--dur-fast) var(--ease-out-expo),
+      border-color var(--dur-fast) var(--ease-out-expo),
+      background-color var(--dur-fast) var(--ease-out-expo);
+  }
+
+  .pill:hover {
+    border-color: var(--violet);
+    color: var(--ink);
+  }
+
+  .pill:has(:checked) {
+    border-color: var(--violet);
+    background: var(--violet-soft);
+    color: var(--ink);
+  }
+
+  .pill:has(:focus-visible) {
+    box-shadow: var(--focus-ring);
+  }
+</style>

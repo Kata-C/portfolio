@@ -1,0 +1,76 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'article'> {
+  flush?: boolean;
+}
+
+const { flush = false, class: className, ...rest } = Astro.props;
+---
+
+<article class:list={['card', 'glass', { flush }, className]} data-spotlight {...rest}>
+  <div class="spot" aria-hidden="true"></div>
+  <slot />
+</article>
+
+<script>
+  import { trackSpotlight } from '@/scripts/spotlight';
+
+  document.querySelectorAll<HTMLElement>('[data-spotlight]').forEach(trackSpotlight);
+</script>
+
+<style>
+  .card {
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface-raised);
+    transition:
+      translate var(--dur-base) var(--ease-out-expo),
+      box-shadow var(--dur-base) var(--ease-out-expo);
+  }
+
+  .flush {
+    padding: 0;
+  }
+
+  .card > :global(*) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card > .spot {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      320px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(167, 139, 250, 0.16),
+      rgba(167, 139, 250, 0) 70%
+    );
+    transition: opacity var(--dur-fast) var(--ease-standard);
+  }
+
+  .card:hover {
+    translate: 0 -4px;
+    box-shadow: var(--inner-highlight), var(--elev-1);
+  }
+
+  .card:hover > .spot,
+  .card:hover::after,
+  .card:focus-within::after {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition-property: box-shadow;
+    }
+
+    .card:hover {
+      translate: none;
+    }
+  }
+</style>

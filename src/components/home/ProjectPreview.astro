@@ -1,0 +1,22 @@
+---
+import BrowserPreview from '@/components/home/BrowserPreview.astro';
+import ChartPreview from '@/components/home/ChartPreview.astro';
+import CodePreview from '@/components/home/CodePreview.astro';
+import PhonePreview from '@/components/home/PhonePreview.astro';
+import type { ProjectPreviewKind } from '@/lib/projects';
+
+interface Props {
+  kind: ProjectPreviewKind;
+}
+
+const previews = {
+  browser: BrowserPreview,
+  phone: PhonePreview,
+  chart: ChartPreview,
+  code: CodePreview,
+} satisfies Record<ProjectPreviewKind, unknown>;
+
+const Preview = previews[Astro.props.kind];
+---
+
+<Preview />

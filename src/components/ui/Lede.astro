@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'p'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<p class:list={['lede', className]} {...rest}>
+  <slot />
+</p>
+
+<style>
+  .lede {
+    max-width: 640px;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: -0.01em;
+    color: var(--ink-muted);
+  }
+</style>

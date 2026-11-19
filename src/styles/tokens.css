@@ -1,0 +1,84 @@
+:root {
+  color-scheme: dark;
+
+  --void: #09090b;
+  --surface: #0f0f13;
+  --surface-raised: #16161c;
+  --line: #24242c;
+  --line-strong: #6b6b7a;
+  --ink: #f5f5f7;
+  --ink-muted: #a1a1aa;
+  --ink-placeholder: #8a8a96;
+  --violet: #a78bfa;
+  --violet-light: #c4b5fd;
+  --violet-strong: #7650ff;
+  --violet-deep: #5b34e6;
+  --violet-soft: #1d1833;
+  --violet-edge: rgba(167, 139, 250, 0.4);
+  --on-violet: #ffffff;
+  --cyan: #67e8f9;
+  --link: var(--violet);
+  --skeleton: #2a2a33;
+  --skeleton-deep: #1c1c23;
+  --glass-fill: rgba(22, 22, 28, 0.55);
+  --glass-fill-strong: rgba(22, 22, 28, 0.72);
+  --glass-fill-subtle: rgba(255, 255, 255, 0.04);
+  --glass-stroke: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --code-fill: rgba(9, 9, 11, 0.6);
+
+  --font-display: 'Geist Variable', Geist, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: 'Geist Variable', Geist, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-20: 80px;
+  --space-32: 128px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --container: 980px;
+  --container-wide: 1200px;
+  --header-offset: 84px;
+
+  --gradient-brand: linear-gradient(135deg, #7650ff 0%, #5b34e6 100%);
+  --gradient-text: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  --gradient-accent: linear-gradient(90deg, #c4b5fd 0%, #a78bfa 55%, #ddd6fe 100%);
+  --gradient-edge: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --gradient-edge-active: linear-gradient(180deg, rgba(196, 181, 253, 0.7) 0%, rgba(118, 80, 255, 0.15) 100%);
+  --gradient-aurora: radial-gradient(60% 55% at 50% 0%, rgba(118, 80, 255, 0.32) 0%, rgba(118, 80, 255, 0) 100%);
+  --gradient-skeleton: linear-gradient(180deg, #2a2a33 0%, #1c1c23 100%);
+  --gradient-sweep: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(255, 255, 255, 0) 100%);
+
+  --glow-violet: 0 8px 32px rgba(118, 80, 255, 0.35), 0 0 0 1px rgba(167, 139, 250, 0.25);
+  --glow-cyan: 0 0 10px rgba(103, 232, 249, 0.7);
+  --focus-ring: 0 0 0 2px #09090b, 0 0 0 4px #67e8f9;
+  --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  --elev-1: 0 24px 64px rgba(0, 0, 0, 0.55);
+
+  --dur-micro: 160ms;
+  --dur-fast: 320ms;
+  --dur-base: 600ms;
+  --dur-slow: 900ms;
+  --dur-hero: 1400ms;
+  --dur-ambient: 24s;
+  --stagger: 80ms;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --blur-reveal: 12px;
+  --blur-glass: 24px;
+  --blur-orb: 80px;
+}

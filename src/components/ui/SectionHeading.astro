@@ -1,0 +1,46 @@
+---
+import DisplayHeading from '@/components/ui/DisplayHeading.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Lede from '@/components/ui/Lede.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string;
+  lede?: string;
+  headingId?: string;
+  align?: 'start' | 'center';
+  size?: 'lg' | 'md';
+  eyebrowTone?: 'accent' | 'light';
+}
+
+const {
+  eyebrow,
+  title,
+  accent,
+  lede,
+  headingId,
+  align = 'start',
+  size = 'lg',
+  eyebrowTone = 'accent',
+} = Astro.props;
+---
+
+<div class:list={['heading', 'reveal', `heading-${align}`]}>
+  <Eyebrow tone={eyebrowTone}>{eyebrow}</Eyebrow>
+  <DisplayHeading id={headingId} title={title} accent={accent} size={size} />
+  {lede && <Lede>{lede}</Lede>}
+</div>
+
+<style>
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .heading-center {
+    align-items: center;
+    text-align: center;
+  }
+</style>

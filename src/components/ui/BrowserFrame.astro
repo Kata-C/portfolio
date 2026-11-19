@@ -1,0 +1,57 @@
+---
+interface Props {
+  address: string;
+}
+
+const { address } = Astro.props;
+---
+
+<div class="frame glass">
+  <div class="bar">
+    <span class="dot dot-active" aria-hidden="true"></span>
+    <span class="dot" aria-hidden="true"></span>
+    <span class="dot" aria-hidden="true"></span>
+    <span class="address">{address}</span>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .frame {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--inner-highlight), var(--elev-1);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-pill);
+    background: var(--line);
+  }
+
+  .dot-active {
+    background: var(--line-strong);
+  }
+
+  .address {
+    margin-inline: auto;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: var(--surface-raised);
+    font: 400 13px/20px var(--font-mono);
+    color: var(--ink-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

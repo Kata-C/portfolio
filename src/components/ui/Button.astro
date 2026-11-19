@@ -1,0 +1,141 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'button'>, 'type'> {
+  variant?: 'primary' | 'secondary';
+  size?: 'md' | 'sm';
+  href?: string;
+  type?: 'button' | 'submit';
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Element = href ? 'a' : 'button';
+const elementProps = href ? { href } : { type };
+---
+
+<Element
+  class:list={[
+    'button',
+    `button-${variant}`,
+    `button-${size}`,
+    { glass: variant === 'secondary' },
+    className,
+  ]}
+  {...elementProps}
+  {...rest}
+>
+  <slot />
+</Element>
+
+<style>
+  .button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    height: 44px;
+    padding: 0 var(--space-6);
+    border: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    font: 500 15px/1 var(--font-sans);
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      transform var(--dur-fast) var(--ease-out-expo),
+      box-shadow var(--dur-fast) var(--ease-out-expo),
+      color var(--dur-micro) var(--ease-standard);
+  }
+
+  .button:not(:active) {
+    transition-timing-function: var(--ease-spring), var(--ease-out-expo), var(--ease-standard);
+  }
+
+  .button-sm {
+    height: 36px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+  }
+
+  .button-primary {
+    background-color: var(--violet-strong);
+    background-image: var(--gradient-brand);
+    color: var(--on-violet);
+    box-shadow: var(--inner-highlight);
+  }
+
+  .button-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%) skewX(-20deg);
+    pointer-events: none;
+    background: var(--gradient-sweep);
+    transition: transform var(--dur-base) var(--ease-out-expo);
+  }
+
+  .button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--inner-highlight), var(--glow-violet);
+  }
+
+  .button-primary:hover::after {
+    transform: translateX(120%) skewX(-20deg);
+  }
+
+  .button-secondary {
+    overflow: visible;
+    background: var(--glass-fill-subtle);
+    color: var(--ink);
+  }
+
+  .button-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  .button-secondary:hover::after {
+    opacity: 1;
+  }
+
+  .button:active {
+    transform: scale(0.97);
+    transition-duration: var(--dur-micro);
+  }
+
+  .button:focus-visible {
+    outline: none;
+    box-shadow: var(--inner-highlight), var(--focus-ring);
+  }
+
+  .button:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button {
+      transition-property: color, box-shadow, opacity;
+    }
+
+    .button:hover,
+    .button:active {
+      transform: none;
+    }
+
+    .button-primary::after {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Tag from '@/components/ui/Tag.astro';
+import Title from '@/components/ui/Title.astro';
+import type { ContactResultCopy } from '@/i18n/Dictionary';
+import type { DeliveryOutcome } from '@/scripts/contact/ContactChannel';
+
+interface Props {
+  outcome: DeliveryOutcome;
+  copy: ContactResultCopy;
+  resetLabel: string;
+}
+
+const { outcome, copy, resetLabel } = Astro.props;
+---
+
+<div class="result" role="status" tabindex="-1" data-contact-result={outcome} hidden>
+  <Tag live>{copy.status}</Tag>
+  <Title>{copy.title}</Title>
+  <p class="body">{copy.body}</p>
+  <Button variant="secondary" data-contact-reset>{resetLabel}</Button>
+</div>
+
+<style>
+  .result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-4);
+    height: 100%;
+    outline: none;
+  }
+
+  .body {
+    color: var(--ink-muted);
+  }
+</style>

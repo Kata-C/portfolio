@@ -1,0 +1,71 @@
+---
+import { PUBLIC_CONTACT_ENDPOINT } from 'astro:env/client';
+import ContactResult from '@/components/home/ContactResult.astro';
+import ProjectTypeField from '@/components/home/ProjectTypeField.astro';
+import TextField from '@/components/home/TextField.astro';
+import Button from '@/components/ui/Button.astro';
+import { site } from '@/data/site';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { form, results } = getDictionary(locale).contact;
+const mailto = `mailto:${site.email}`;
+---
+
+<div
+  data-contact
+  data-endpoint={PUBLIC_CONTACT_ENDPOINT}
+  data-recipient={site.email}
+  data-subject={form.mailSubject}
+>
+  <form class="form" action={mailto} method="post" enctype="text/plain" data-contact-form>
+    <input type="hidden" name="idioma" value={locale} />
+    <ProjectTypeField name="tipo" legend={form.projectType} options={form.projectTypes} />
+    <TextField label={form.name} name="nombre" placeholder={form.namePlaceholder} autocomplete="name" />
+    <TextField
+      label={form.email}
+      name="email"
+      type="email"
+      placeholder={form.emailPlaceholder}
+      autocomplete="email"
+    />
+    <TextField label={form.message} name="mensaje" placeholder={form.messagePlaceholder} multiline />
+    <p class="error" role="alert" data-contact-error hidden>
+      {form.error} <a href={mailto}>{site.email}</a>.
+    </p>
+    <div class="actions">
+      <Button type="submit">{form.submit}</Button>
+    </div>
+  </form>
+  <ContactResult outcome="delivered" copy={results.delivered} resetLabel={form.reset} />
+  <ContactResult outcome="handed-off" copy={results['handed-off']} resetLabel={form.reset} />
+</div>
+
+<script>
+  import { mountContactForm } from '@/scripts/contact/mountContactForm';
+
+  document.querySelectorAll<HTMLElement>('[data-contact]').forEach(mountContactForm);
+</script>
+
+<style>
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .actions {
+    display: flex;
+  }
+
+  .error {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  id?: string;
+  title: string;
+  accent?: string;
+  size?: 'lg' | 'md';
+}
+
+const { id, title, accent, size = 'lg' } = Astro.props;
+---
+
+<h2 id={id} class:list={['display', `display-${size}`, { 'gradient-text': !accent }]}>
+  {
+    accent ? (
+      <>
+        <span class="gradient-text">{`${title} `}</span>
+        <span class="gradient-accent">{accent}</span>
+      </>
+    ) : (
+      title
+    )
+  }
+</h2>
+
+<style>
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .display-lg {
+    font-size: clamp(38px, 5.6vw, 56px);
+    line-height: 1.04;
+  }
+
+  .display-md {
+    font-size: clamp(32px, 4.6vw, 48px);
+    line-height: 1.06;
+  }
+</style>

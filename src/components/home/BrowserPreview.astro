@@ -1,0 +1,90 @@
+---
+import PreviewFrame from '@/components/home/PreviewFrame.astro';
+---
+
+<PreviewFrame class="browser">
+  <div class="dots">
+    <span class="dot dot-active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <span class="heading heading-wide"></span>
+  <span class="heading heading-short"></span>
+  <span class="text"></span>
+  <div class="tiles">
+    <span class="tile"></span>
+    <span class="tile tile-accent"></span>
+    <span class="tile"></span>
+  </div>
+</PreviewFrame>
+
+<style>
+  .browser {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 20px;
+    background-image: radial-gradient(
+      80% 70% at 70% 0%,
+      rgba(118, 80, 255, 0.22) 0%,
+      rgba(118, 80, 255, 0) 100%
+    );
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--line);
+  }
+
+  .dot-active {
+    background: var(--line-strong);
+  }
+
+  .heading {
+    height: 22px;
+    border-radius: var(--radius-sm);
+    background: var(--skeleton);
+  }
+
+  .heading-wide {
+    width: 70%;
+    margin-top: var(--space-6);
+  }
+
+  .heading-short {
+    width: 50%;
+  }
+
+  .text {
+    width: 80%;
+    height: 8px;
+    margin-top: 6px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-raised);
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-3);
+  }
+
+  .tile {
+    height: 56px;
+    border-radius: 8px;
+    background: var(--surface-raised);
+  }
+
+  .tile-accent {
+    background: var(--violet-soft);
+  }
+</style>

@@ -1,0 +1,24 @@
+# dependencias
+node_modules/
+
+# resultado de compilar
+dist/
+
+# archivos que Astro genera solo
+.astro/
+
+# variables de entorno (pueden llevar secretos)
+.env
+.env.*
+!.env.example
+
+# Cloudflare
+.wrangler/
+
+# registros
+npm-debug.log*
+
+# macOS y editores
+.DS_Store
+.vscode/
+.idea/

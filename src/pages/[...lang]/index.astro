@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { locales } from '@/i18n/locales';
+import { localeParam } from '@/i18n/paths';
+import { getProjects } from '@/lib/projects';
+import HomeView from '@/views/HomeView.astro';
+
+export const getStaticPaths = (() =>
+  locales.map((locale) => ({
+    params: { lang: localeParam(locale) },
+    props: { locale },
+  }))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { locale } = Astro.props;
+const projects = await getProjects(locale);
+---
+
+<HomeView locale={locale} projects={projects} />

@@ -1,0 +1,44 @@
+---
+import ProjectMedia from '@/components/project/ProjectMedia.astro';
+import BrowserFrame from '@/components/ui/BrowserFrame.astro';
+import Container from '@/components/ui/Container.astro';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project.showcase;
+---
+
+<section class="showcase" aria-label={t.label}>
+  <Container width="wide">
+    <div class="scroll-scale">
+      <BrowserFrame address={project.domain}>
+        <ProjectMedia
+          class="cover"
+          image={project.media.cover}
+          alt={t.alt(project.title)}
+          emptyLabel={t.emptyLabel}
+          bare
+        >
+          {t.placeholder}
+        </ProjectMedia>
+      </BrowserFrame>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .showcase {
+    padding-top: var(--space-20);
+  }
+
+  .cover {
+    aspect-ratio: 1152 / 620;
+  }
+</style>

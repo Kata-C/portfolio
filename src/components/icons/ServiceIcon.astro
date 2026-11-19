@@ -1,0 +1,20 @@
+---
+import DashboardIcon from '@/components/icons/DashboardIcon.astro';
+import MonitorIcon from '@/components/icons/MonitorIcon.astro';
+import PhoneIcon from '@/components/icons/PhoneIcon.astro';
+import type { ServiceIconName } from '@/data/services';
+
+interface Props {
+  name: ServiceIconName;
+}
+
+const icons = {
+  website: MonitorIcon,
+  app: PhoneIcon,
+  system: DashboardIcon,
+} satisfies Record<ServiceIconName, unknown>;
+
+const Icon = icons[Astro.props.name];
+---
+
+<Icon />

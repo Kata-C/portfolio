@@ -1,0 +1,48 @@
+---
+import ProjectPreview from '@/components/home/ProjectPreview.astro';
+import Card from '@/components/ui/Card.astro';
+import Chip from '@/components/ui/Chip.astro';
+import TextLink from '@/components/ui/TextLink.astro';
+import Title from '@/components/ui/Title.astro';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+  actionLabel: string;
+}
+
+const { project, index, actionLabel } = Astro.props;
+const { title, summary, preview, label, href } = project;
+---
+
+<Card class="reveal project" style={`--i: ${index}`}>
+  <div class="art" aria-hidden="true">
+    <ProjectPreview kind={preview} />
+  </div>
+  <Chip>{label}</Chip>
+  <Title>{title}</Title>
+  <p class="summary">{summary}</p>
+  <TextLink href={href}>{actionLabel}</TextLink>
+</Card>
+
+<style>
+  .project {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .art {
+    display: grid;
+    align-self: stretch;
+    height: 180px;
+    margin-bottom: var(--space-3);
+  }
+
+  .summary {
+    flex: 1;
+    color: var(--ink-muted);
+  }
+</style>

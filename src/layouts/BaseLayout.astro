@@ -1,0 +1,61 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@/styles/tokens.css';
+import '@/styles/base.css';
+import '@/styles/utilities.css';
+import SiteFooter from '@/components/layout/SiteFooter.astro';
+import { sectionIds } from '@/data/sections';
+import type { Alternate } from '@/i18n/alternates';
+import { defaultLocale, localeDetails, type Locale } from '@/i18n/locales';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  alternates: Alternate[];
+}
+
+const { title, description, locale, alternates } = Astro.props;
+const { site } = Astro;
+const fallback = alternates.find((alternate) => alternate.locale === defaultLocale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={localeDetails[locale].openGraph} />
+    {
+      site &&
+        alternates.map((alternate) => (
+          <link rel="alternate" hreflang={alternate.locale} href={new URL(alternate.href, site)} />
+        ))
+    }
+    {site && fallback && <link rel="alternate" hreflang="x-default" href={new URL(fallback.href, site)} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div id={sectionIds.top} class="page">
+      <slot name="header" />
+      <main>
+        <slot />
+      </main>
+      <SiteFooter locale={locale} />
+    </div>
+  </body>
+</html>
+
+<style>
+  .page {
+    min-height: 100vh;
+    overflow-x: clip;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import Card from '@/components/ui/Card.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Title from '@/components/ui/Title.astro';
+import { formatOrdinal } from '@/lib/ordinal';
+
+interface Props {
+  title: string;
+  body: string;
+  index: number;
+}
+
+const { title, body, index } = Astro.props;
+---
+
+<Card class="reveal feature" style={`--i: ${index}`}>
+  <Eyebrow>{formatOrdinal(index)}</Eyebrow>
+  <Title>{title}</Title>
+  <p class="body">{body}</p>
+</Card>
+
+<style>
+  .feature {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .body {
+    color: var(--ink-muted);
+  }
+</style>

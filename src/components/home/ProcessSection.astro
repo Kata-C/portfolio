@@ -1,0 +1,40 @@
+---
+import ProcessStepItem from '@/components/home/ProcessStepItem.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { sectionIds } from '@/data/sections';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+
+interface Props {
+  locale: Locale;
+}
+
+const t = getDictionary(Astro.props.locale).process;
+---
+
+<Section id={sectionIds.process} tone="surface" labelledby="process-title">
+  <Container class="stack">
+    <SectionHeading eyebrow={t.eyebrow} title={t.title} headingId="process-title" />
+    <ol class="steps">
+      {t.steps.map((step, index) => <ProcessStepItem step={step} index={index} />)}
+    </ol>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
+</style>

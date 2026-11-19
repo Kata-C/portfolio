@@ -1,0 +1,44 @@
+---
+import FeatureCard from '@/components/project/FeatureCard.astro';
+import Container from '@/components/ui/Container.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { getDictionary } from '@/i18n/getDictionary';
+import type { Locale } from '@/i18n/locales';
+import type { Project } from '@/lib/projects';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const t = getDictionary(locale).project.features;
+---
+
+<Section tone="surface" labelledby="features-title">
+  <Container class="stack">
+    <SectionHeading eyebrow={t.eyebrow} title={t.title} headingId="features-title" size="md" />
+    <div class="grid">
+      {
+        project.features.map((feature, index) => (
+          <FeatureCard title={feature.title} body={feature.body} index={index} />
+        ))
+      }
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: var(--space-6);
+  }
+</style>

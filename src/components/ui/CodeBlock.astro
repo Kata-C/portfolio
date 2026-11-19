@@ -1,0 +1,43 @@
+---
+import type { CodeLine } from '@/data/heroSnippet';
+
+interface Props {
+  lines: CodeLine[];
+}
+
+const { lines } = Astro.props;
+---
+
+<pre class="code">{lines.map((line) => (
+  <span class="line">{line.map((token) => (
+    <span class:list={[token.tone && `token-${token.tone}`]}>{token.text}</span>
+  ))}</span>
+))}</pre>
+
+<style>
+  .code {
+    padding: var(--space-8);
+    overflow-x: auto;
+    background: var(--code-fill);
+    font: 400 14px/24px var(--font-mono);
+    color: var(--ink-muted);
+  }
+
+  .line {
+    display: block;
+    min-height: 24px;
+    white-space: pre;
+  }
+
+  .token-keyword {
+    color: var(--violet);
+  }
+
+  .token-name {
+    color: var(--ink);
+  }
+
+  .token-string {
+    color: var(--violet-light);
+  }
+</style>
